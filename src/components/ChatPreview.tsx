@@ -1,10 +1,8 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { selectContact, markAsUnread, deleteConversation } from '../store/chatSlice';
-import { openModal, closeModal } from '../store/modalSlice';
 import Modal from './Modal';
 import styles from './chatPreview.module.css';
-import { RootState } from '../store';
 
 interface ChatPreviewCardProps {
     contact: {
@@ -24,7 +22,7 @@ interface ChatPreviewCardProps {
 
 const ChatPreviewCard: React.FC<ChatPreviewCardProps> = ({ contact, type }) => {
     const dispatch = useDispatch();
-    const isModalOpen = useSelector((state: RootState) => state.modal.isOpen);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleContactClick = () => {
         dispatch(selectContact(contact.userId));
@@ -32,13 +30,17 @@ const ChatPreviewCard: React.FC<ChatPreviewCardProps> = ({ contact, type }) => {
 
     const handleMarkAsUnread = () => {
         dispatch(markAsUnread(contact.userId));
-        dispatch(closeModal());
+        setIsModalOpen(false);
     };
 
     const handleDeleteConversation = () => {
         dispatch(deleteConversation(contact.userId));
-        dispatch(closeModal());
+        setIsModalOpen(false);
     };
+
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    }
 
     return (
         <div className={`${styles.reviewContainer} ${type === 'chat' && styles.bgHighlight}`} onClick={handleContactClick}>
@@ -59,22 +61,23 @@ const ChatPreviewCard: React.FC<ChatPreviewCardProps> = ({ contact, type }) => {
             <div className={styles.actionButtons}>
                 {type === 'chat' && <div className={styles.editIcon}><img src="/videocamera.png" alt="" className={styles.video} /></div>}
                 {type === 'chat' && <div className={styles.editIcon}><img src="/telephone.png" alt="" /></div>}
-                <div className={styles.editIcon} onClick={() => dispatch(openModal())}>
+                <div className={styles.editIcon} onClick={() => setIsModalOpen(true)}>
                     <img src="/ellipsis.png" alt="" />
-                    {type !== 'chat' && (
-                        <Modal isOpen={isModalOpen} onClose={() => dispatch(closeModal())}>
-                            <div className={styles.menuItem} onClick={handleMarkAsUnread}>
-                                Mark as unread
-                            </div>
-                            <div className={styles.menuItem} onClick={handleDeleteConversation}>
-                                Delete conversation
-                            </div>
-                            <div className={styles.menuItem} onClick={() => dispatch(closeModal())}>
-                                Cancel
-                            </div>
-                        </Modal>
-                    )}
+
                 </div>
+                {type !== 'chat' && (
+                    <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+                        <div className={styles.menuItem} onClick={handleMarkAsUnread}>
+                            Mark as unread
+                        </div>
+                        <div className={styles.menuItem} onClick={handleDeleteConversation}>
+                            Delete conversation
+                        </div>
+                        <div className={styles.menuItem} onClick={handleCancel}>
+                            Cancel
+                        </div>
+                    </Modal>
+                )}
             </div>
         </div>
     );
