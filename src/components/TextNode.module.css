@@ -1,0 +1,36 @@
+.textNode {
+  padding: 16px 0px 0px 0px;
+  border-radius: 44px;
+  padding: 16px;
+  margin: 8px;
+  max-width: max-content;
+}
+
+.textNode p {
+  font-size: 16px;
+  font-weight: 300;
+  text-align: left;
+  margin: 0px;
+  letter-spacing: -0.30000001192092896px;
+}
+
+.wrapper {
+  float: left;
+}
+
+.floatright {
+  float: right;
+  background-color: #dcf7c5;
+}
+.floatleft {
+  float: left;
+  background-color: #fafafa;
+}
+
+.textNode span {
+  font-size: 14px;
+  font-weight: 400;
+  text-align: left;
+  /* float: right; */
+  color: #00000075;
+}

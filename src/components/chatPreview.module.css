@@ -1,0 +1,92 @@
+.reviewContainer {
+  height: 64px;
+  border-radius: 4px;
+  gap: 8px;
+  cursor: pointer;
+  border-radius: 10px;
+  position: relative;
+}
+.bgHighlight {
+  background-color: #f6f6f6;
+}
+
+.reviewContainer:hover {
+  background-color: #f5f7fb;
+}
+
+.profile {
+  width: 40px;
+  height: 40px;
+  margin: 10px;
+}
+
+.profile img {
+  width: 40px;
+  height: 40px;
+  top: 8px;
+  left: 8px;
+  border-radius: 40px;
+}
+
+.onlineStatus {
+  width: 10px;
+  height: 10px;
+  position: relative;
+  background-color: #3ba55d;
+  border-radius: 10px;
+}
+.reviewContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.reviewContainerIn {
+  display: flex;
+  align-items: center;
+}
+.profileName {
+  font-size: 16px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.lastMessage {
+  font-size: 14px;
+  font-weight: 400;
+  text-align: left;
+  color: #8e8e93;
+}
+
+.editIcon img {
+  width: 15px;
+  height: 15px;
+  display: flex;
+  align-items: center;
+  padding-right: 8px;
+}
+.video {
+  width: 25px !important;
+  height: 25px !important;
+  padding-top: 3px;
+}
+.sideStatus {
+  top: -41px;
+  left: 172px;
+}
+
+.bottomStatus {
+  top: -15px;
+  left: 27px;
+}
+
+.actionButtons {
+  display: flex;
+}
+
+.menuItem {
+  width: 148px;
+  border-radius: 4px;
+  padding: 6px;
+  font-size: 13px;
+  font-weight: 400px;
+}

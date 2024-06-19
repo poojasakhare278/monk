@@ -1,24 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styles from './app.module.css';
+import ChatBox from './components/ChatBox';
+import ChatPreviewCard from './components/ChatPreview';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className={styles.dashboard}>
+        <div className={styles.contactsContainer}>
+          <span className={styles.chatHeader}>
+            <p>
+              Chats
+            </p>
+          </span>
+          <ChatPreviewCard type={'preview'} />
+          <ChatPreviewCard type={'preview'} />
+          <ChatPreviewCard type={'preview'} />
+        </div>
+        <div className={styles.chatContainer}>
+          <div className="profileChatHeader">
+            <ChatPreviewCard type={'chat'} />
+          </div>
+          <ChatBox />
+        </div>
+      </div>
     </div>
   );
 }

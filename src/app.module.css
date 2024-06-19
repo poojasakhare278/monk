@@ -1,0 +1,19 @@
+.dashboard {
+  display: grid;
+  grid-template-columns: 25% 75%;
+}
+
+.chatContainer {
+  height: 93vh;
+  padding: 28px 40px;
+}
+.contactsContainer {
+  height: 100vh;
+  border-right: 1px solid #efefef;
+  padding: 0px 8px;
+}
+
+.chatHeader p {
+  font-size: 24px;
+  margin: 16px 0px;
+}
