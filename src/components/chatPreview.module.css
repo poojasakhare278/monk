@@ -18,6 +18,8 @@
   width: 40px;
   height: 40px;
   margin: 10px;
+  object-fit: cover;
+  object-position: center;
 }
 
 .profile img {
@@ -26,6 +28,8 @@
   top: 8px;
   left: 8px;
   border-radius: 40px;
+  object-fit: cover;
+  object-position: center;
 }
 
 .onlineStatus {
@@ -45,6 +49,8 @@
   align-items: center;
 }
 .profileName {
+  display: flex;
+  flex-direction: row;
   font-size: 16px;
   font-weight: 600;
   text-align: left;
@@ -52,9 +58,13 @@
 
 .lastMessage {
   font-size: 14px;
+  height: 24px;
   font-weight: 400;
   text-align: left;
   color: #8e8e93;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 230px;
 }
 
 .editIcon img {
@@ -65,22 +75,24 @@
   padding-right: 8px;
 }
 .video {
-  width: 25px !important;
-  height: 25px !important;
-  padding-top: 3px;
+  width: 17px !important;
+  height: 21px !important;
+  padding-top: 8px;
+  margin-right: 5px;
 }
 .sideStatus {
-  top: -41px;
-  left: 172px;
+  top: 6px;
+  left: 6px;
 }
 
 .bottomStatus {
-  top: -15px;
-  left: 27px;
+  top: 29px;
+  left: -53px;
 }
 
 .actionButtons {
   display: flex;
+  align-items: center;
 }
 
 .menuItem {
@@ -89,4 +101,19 @@
   padding: 6px;
   font-size: 13px;
   font-weight: 400px;
+}
+
+.unreadCount {
+  width: 20px;
+  height: 20px;
+  background: #3ba55d;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  color: white;
+  position: absolute;
+  right: 27px;
+  top: 34px;
 }

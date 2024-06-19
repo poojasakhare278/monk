@@ -1,14 +1,19 @@
-.chatArea {
+.chatBoxContainer {
   display: flex;
   flex-direction: column;
-  min-height: 74vh;
-  padding: 20px 0px;
+  height: 100%;
+}
+
+.chatArea {
+  overflow-y: auto;
+  padding: 20px 0;
+  max-height: 74vh;
 }
 
 .chatFooter {
   display: flex;
   align-items: center;
-  padding: 5px 0px;
+  padding: 5px 0;
 }
 
 .add,
@@ -16,10 +21,10 @@
   display: flex;
   width: 32px;
   height: 32px;
-  margin: 0px 8px 0px 0px;
+  margin: 0 8px 0 0;
   border: 1px solid #d9d9d9;
   color: #888888;
-  border-radius: 40px;
+  border-radius: 50%;
   align-items: center;
   justify-content: center;
 }
@@ -33,19 +38,16 @@
   height: 14px;
 }
 
-.message {
-  color: #888888;
-}
-
 .messageBox {
+  flex: 1;
   border: 1px solid #d9d9d9;
   border-radius: 40px;
-  padding: 0px 13px;
-  width: 88%;
-  height: 48px;
+  padding: 0 13px;
   display: flex;
   align-items: center;
 }
-.messageBox p {
+
+.message {
+  color: #888888;
   font-weight: 300;
 }
