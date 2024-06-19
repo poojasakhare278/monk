@@ -1,12 +1,12 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import styles from './Modal.module.css';
 
 interface ModalProps {
     isOpen: boolean;
     onClose: () => void;
+    children: React.ReactNode;
     onMouseEnter?: () => void;
     onMouseLeave?: () => void;
-    children: ReactNode;
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onMouseEnter, onMouseLeave, children }) => {

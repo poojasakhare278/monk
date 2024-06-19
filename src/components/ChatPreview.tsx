@@ -1,63 +1,82 @@
-import { useState } from 'react';
-import Modal from './Modal'
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectContact, markAsUnread, deleteConversation } from '../store/chatSlice';
+import { openModal, closeModal } from '../store/modalSlice';
+import Modal from './Modal';
 import styles from './chatPreview.module.css';
+import { RootState } from '../store';
 
-const ChatPreviewCard = (props: { type: string; }) => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+interface ChatPreviewCardProps {
+    contact: {
+        userId: string;
+        name: string;
+        unreadCount: number;
+        profilePictureURL: string;
+        chat: {
+            [key: string]: {
+                message: string;
+                timeStamp: string;
+            };
+        }[];
+    };
+    type: string;
+}
 
-    const openModal = () => {
-        setIsModalOpen(true);
+const ChatPreviewCard: React.FC<ChatPreviewCardProps> = ({ contact, type }) => {
+    const dispatch = useDispatch();
+    const isModalOpen = useSelector((state: RootState) => state.modal.isOpen);
+
+    const handleContactClick = () => {
+        dispatch(selectContact(contact.userId));
     };
 
-    const closeModal = () => {
-        setIsModalOpen(false);
+    const handleMarkAsUnread = () => {
+        dispatch(markAsUnread(contact.userId));
+        dispatch(closeModal());
     };
 
-    const handleMouseEnter = () => {
-        setIsModalOpen(true);
-    };
-
-    const handleMouseLeave = () => {
-        setIsModalOpen(false);
+    const handleDeleteConversation = () => {
+        dispatch(deleteConversation(contact.userId));
+        dispatch(closeModal());
     };
 
     return (
-        <div className={`${styles.reviewContainer} ${props.type === 'chat' && styles.bgHighlight}`}>
+        <div className={`${styles.reviewContainer} ${type === 'chat' && styles.bgHighlight}`} onClick={handleContactClick}>
             <div className={styles.reviewContainerIn}>
                 <div className={styles.profile}>
-                    <img src="/profile.png" alt="" className={styles.profilePicture} />
-                    <div className={`${styles.onlineStatus} ${props.type === 'chat' ? styles.sideStatus : styles.bottomStatus}`}></div>
+                    <img src={contact.profilePictureURL} alt={contact.name} className={styles.profilePicture} />
+                    <div className={`${styles.onlineStatus} ${type === 'chat' ? styles.sideStatus : styles.bottomStatus}`}></div>
                 </div>
                 <div className={styles.personInfo}>
-                    <div className={styles.profileName}>Josh California</div>
-                    <div className={styles.lastMessage}>I think top two are:</div>
+                    <div className={styles.profileName}>{contact.name}</div>
+                    <div className={styles.lastMessage}>
+                        {contact.chat[contact.chat.length - 1][Object.keys(contact.chat[contact.chat.length - 1])[0]].message}
+                    </div>
+                    {contact.unreadCount > 0 && <div className={styles.unreadCount}>{contact.unreadCount}</div>}
                 </div>
             </div>
             <div className={styles.actionButtons}>
-                {(props.type === 'chat') && <div className={styles.editIcon}><img src="/videocamera.png" alt="" className={styles.video} /></div>}
-                {(props.type === 'chat') && <div className={styles.editIcon}><img src="/telephone.png" alt="" /></div>}
-                <div className={styles.editIcon} onClick={openModal}
-                >
-                    <img
-                        src="/ellipsis.png"
-                        alt=""
-                    />
-                    {(props.type !== 'chat') && <Modal isOpen={isModalOpen} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClose={closeModal}>
-                        <div className={styles.menuItem}>
-                            Mark as unread
-                        </div>
-                        <div className={styles.menuItem}>
-                            Mark as unread
-                        </div>
-                        <div className={styles.menuItem}>
-                            Mark as unread
-                        </div>
-                    </Modal>}
+                {type === 'chat' && <div className={styles.editIcon}><img src="/videocamera.png" alt="" className={styles.video} /></div>}
+                {type === 'chat' && <div className={styles.editIcon}><img src="/telephone.png" alt="" /></div>}
+                <div className={styles.editIcon} onClick={() => dispatch(openModal())}>
+                    <img src="/ellipsis.png" alt="" />
+                    {type !== 'chat' && (
+                        <Modal isOpen={isModalOpen} onClose={() => dispatch(closeModal())}>
+                            <div className={styles.menuItem} onClick={handleMarkAsUnread}>
+                                Mark as unread
+                            </div>
+                            <div className={styles.menuItem} onClick={handleDeleteConversation}>
+                                Delete conversation
+                            </div>
+                            <div className={styles.menuItem} onClick={() => dispatch(closeModal())}>
+                                Cancel
+                            </div>
+                        </Modal>
+                    )}
                 </div>
             </div>
-
         </div>
     );
-}
+};
 
 export default ChatPreviewCard;

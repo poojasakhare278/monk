@@ -2,7 +2,7 @@
   padding: 16px 0px 0px 0px;
   border-radius: 44px;
   padding: 16px;
-  margin: 8px;
+  margin-top: 8px;
   max-width: max-content;
 }
 
@@ -14,8 +14,11 @@
   letter-spacing: -0.30000001192092896px;
 }
 
-.wrapper {
+.wrapperl {
   float: left;
+}
+.wrapperr {
+  float: right;
 }
 
 .floatright {
@@ -33,4 +36,9 @@
   text-align: left;
   /* float: right; */
   color: #00000075;
+}
+
+.thread {
+  display: flex;
+  flex-direction: column;
 }
