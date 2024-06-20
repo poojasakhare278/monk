@@ -18,15 +18,20 @@ interface ChatPreviewCardProps {
         }[];
     };
     type: string;
+    showChatWithBackButton?: () => void;
 }
 
-const ChatPreviewCard: React.FC<ChatPreviewCardProps> = ({ contact, type }) => {
+const ChatPreviewCard: React.FC<ChatPreviewCardProps> = ({ contact, type, showChatWithBackButton }) => {
     const dispatch = useDispatch();
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleContactClick = () => {
         dispatch(selectContact(contact.userId));
     };
+
+    const handleClick = () => {
+        showChatWithBackButton && showChatWithBackButton()
+    }
 
     const handleMarkAsUnread = () => {
         dispatch(markAsUnread(contact.userId));
@@ -48,7 +53,7 @@ const ChatPreviewCard: React.FC<ChatPreviewCardProps> = ({ contact, type }) => {
                 <div className={styles.profile}>
                     <img src={contact.profilePictureURL} alt={contact.name} className={styles.profilePicture} />
                 </div>
-                <div className={styles.personInfo}>
+                <div className={styles.personInfo} onClick={handleClick}>
                     <div className={styles.profileName}>{contact.name}
                         <div className={`${styles.onlineStatus} ${type === 'chat' ? styles.sideStatus : styles.bottomStatus}`}></div>
                     </div>

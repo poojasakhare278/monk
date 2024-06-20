@@ -31,15 +31,15 @@ useEffect(() =>{
             <p>Chats</p>
           </span>
           {contacts.map(contact => (
-            <div onClick={showChatWithBackButton}>
-              <ChatPreviewCard key={contact.userId} contact={contact} type="preview"  />
+            <div>
+              <ChatPreviewCard key={contact.userId} contact={contact} type="preview" showChatWithBackButton={showChatWithBackButton}  />
             </div>
           ))}
         </div>
         {/* Chat Container */}
         {showChat && selectedContact && (
           <div className={styles.chatContainer}>
-            <button onClick={hideChat} className={styles.backButton}>{"< Back"}</button>
+            <button onClick={hideChat} className={styles.backButton}>{"< Chats"}</button>
             <div className="profileChatHeader">
               <ChatPreviewCard contact={selectedContact} type="chat" />
             </div>
