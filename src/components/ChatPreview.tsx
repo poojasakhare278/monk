@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { selectContact, markAsUnread, deleteConversation } from '../store/chatSlice';
 import Modal from './Modal';
@@ -48,8 +48,8 @@ const ChatPreviewCard: React.FC<ChatPreviewCardProps> = ({ contact, type, showCh
     }
 
     return (
-        <div className={`${styles.reviewContainer} ${type === 'chat' && styles.bgHighlight}`} onClick={handleContactClick}>
-            <div className={styles.reviewContainerIn}>
+        <div className={`${styles.reviewContainer} ${type === 'chat' && styles.bgHighlight}`}>
+            <div className={styles.reviewContainerIn}  onClick={handleContactClick}>
                 <div className={styles.profile}>
                     <img src={contact.profilePictureURL} alt={contact.name} className={styles.profilePicture} />
                 </div>

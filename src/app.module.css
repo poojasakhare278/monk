@@ -22,11 +22,7 @@
 }
 
 .backButton {
-  padding: 16px 0px;
-  background: none;
-  border: none;
-  font-size: 16px;
-  color: #007AFF
+  display: none;
 }
 
 @media (max-width: 584px) {
@@ -41,5 +37,13 @@
 
   .chatContainer {
     display: block; 
+  }
+  .backButton{
+    display: block;
+    padding: 16px 0px;
+    background: none;
+    border: none;
+    font-size: 16px;
+    color: #007AFF
   }
 }

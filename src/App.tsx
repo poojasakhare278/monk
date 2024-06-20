@@ -19,9 +19,7 @@ function App() {
   const hideChat = () => {
     setShowChat(false);
   };
-useEffect(() =>{
-  console.log("showChat", showChat, selectedContact)
-})
+
   return (
     <div className="App">
       <div className={styles.dashboard}>
