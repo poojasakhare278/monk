@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './app.module.css';
 import ChatBox from './components/ChatBox';
 import ChatPreviewCard from './components/ChatPreview';
@@ -10,19 +10,36 @@ function App() {
   const selectedContactId = useSelector((state: RootState) => state.chat.selectedContactId);
   const selectedContact = contacts.find(contact => contact.userId === selectedContactId);
 
+  const [showChat, setShowChat] = useState(false);
+
+  const showChatWithBackButton = () => {
+    setShowChat(true);
+  };
+
+  const hideChat = () => {
+    setShowChat(false);
+  };
+useEffect(() =>{
+  console.log("showChat", showChat, selectedContact)
+})
   return (
     <div className="App">
       <div className={styles.dashboard}>
-        <div className={styles.contactsContainer}>
+        {/* Contacts Container */}
+        <div className={`${styles.contactsContainer} ${showChat ? styles.hideContainer : ''}`}>
           <span className={styles.chatHeader}>
             <p>Chats</p>
           </span>
           {contacts.map(contact => (
-            <ChatPreviewCard key={contact.userId} contact={contact} type="preview" />
+            <div onClick={showChatWithBackButton}>
+              <ChatPreviewCard key={contact.userId} contact={contact} type="preview"  />
+            </div>
           ))}
         </div>
-        {selectedContact && (
+        {/* Chat Container */}
+        {showChat && selectedContact && (
           <div className={styles.chatContainer}>
+            <button onClick={hideChat} className={styles.backButton}>{"< Back"}</button>
             <div className="profileChatHeader">
               <ChatPreviewCard contact={selectedContact} type="chat" />
             </div>
