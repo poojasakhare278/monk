@@ -53,9 +53,9 @@ const ChatPreviewCard: React.FC<ChatPreviewCardProps> = ({ contact, type }) => {
                         <div className={`${styles.onlineStatus} ${type === 'chat' ? styles.sideStatus : styles.bottomStatus}`}></div>
                     </div>
                     <div className={styles.lastMessage}>
-                        {contact.chat[contact.chat.length - 1][Object.keys(contact.chat[contact.chat.length - 1])[0]].message}
+                        {type === 'chat' ? 'Click here for contact info' : contact.chat[contact.chat.length - 1][Object.keys(contact.chat[contact.chat.length - 1])[0]].message}
                     </div>
-                    {contact.unreadCount > 0 && <div className={styles.unreadCount}>{contact.unreadCount}</div>}
+                    {contact.unreadCount > 0 && type !== 'chat' && <div className={styles.unreadCount}>{contact.unreadCount}</div>}
                 </div>
             </div>
             <div className={styles.actionButtons}>

@@ -153,7 +153,7 @@ const initialState: ChatState = {
       ],
     },
   ],
-  selectedContactId: null,
+  selectedContactId: 'user1',
 };
 
 const chatSlice = createSlice({
