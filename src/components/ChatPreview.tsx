@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { selectContact, markAsUnread, deleteConversation } from '../store/chatSlice';
 import Modal from './Modal';
